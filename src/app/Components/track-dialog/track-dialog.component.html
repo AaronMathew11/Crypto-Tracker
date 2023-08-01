@@ -4,15 +4,16 @@
   <p>Fill in the Upper alert limit</p>
     <mat-form-field class="example-full-width">
       <mat-label>Upper Limit</mat-label>
-      <input matInput placeholder="Enter the upper alert limit" value="">
+      <input  [(ngModel)]="upperLimit" matInput placeholder="Enter the upper alert limit" value="">
     </mat-form-field>
 
   <p>Fill in the lower alert limit</p>
   <mat-form-field class="example-full-width">
     <mat-label>Lower Limit</mat-label>
-    <input matInput placeholder="Enter the lower alert limit" value="">
+    <input [(ngModel)]="lowerLimit" matInput placeholder="Enter the lower alert limit" value="">
   </mat-form-field>
  <p>would you like to recieve daily update emails for this currency ?</p>
-  <mat-slide-toggle>Slide me!</mat-slide-toggle>
+  <mat-slide-toggle (click)="toggleSubscription()">Slide me!</mat-slide-toggle>
+  <button mat-button (click)="submit()">submit</button>
 </form>
 </div>

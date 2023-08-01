@@ -11,6 +11,7 @@ import { Coin } from '../Models/Crypto';
 export class ApiCallsService {
 
   baseUrl: string = environment.baseUrl;
+  apiBaseUrl : string = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +28,21 @@ export class ApiCallsService {
   public GetPriceRange(coinId : string, t1:number , t2:number) : Observable<any>
   {
     return this.http.get<any>(this.baseUrl+'/coins/'+coinId+`/market_chart/range?vs_currency=usd&from=${t1}&to=${t2}`);
+  }
+
+  public AddToTaskList(data :any) : Observable<any>
+  {
+    let headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "*"
+    })
+    return this.http.post(this.apiBaseUrl+'/addTrackingCoin',data,{
+      headers
+    });
+  }
+
+  public GetTaskList() : Observable<any>
+  {
+    return this.http.get<any>(this.baseUrl+'/getTrackingList');
   }
 
 }

@@ -9,6 +9,10 @@ import { ApiCallsService } from 'src/app/Service/api-calls.service';
 })
 export class TrackDialogComponent {
 
+  upperLimit:string="";
+  lowerLimit:string="";
+  emailSubscription :boolean =false;
+
   constructor(public dialogRef: MatDialogRef<TrackDialogComponent>, @Inject(MAT_DIALOG_DATA) public message:any, private apiCall : ApiCallsService){
 
   }
@@ -16,4 +20,30 @@ export class TrackDialogComponent {
   ngOnInit(){
     console.log(this.message);
   }
+
+  toggleSubscription(){
+    this.emailSubscription=!this.emailSubscription;
+  }
+
+  submit()
+  {
+    var coin={
+      id: this.message.id,
+      upperLimit : this.upperLimit,
+      lowerLimit : this.lowerLimit,
+      updateEmail : this.emailSubscription
+    }
+    this.apiCall.AddToTaskList(coin).subscribe(
+      result=>{
+        console.log(result);
+        if(result.status==200)
+        {
+          //handle toast here
+        }
+      }
+    )
+
+  }
+
+
 }

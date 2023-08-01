@@ -16,6 +16,7 @@ export class CardListComponent {
 
   }
 
+  viewTrackList:boolean=false;
   coinDetails! : Coin[] ;
   selectedCoin!:Coin;
   filteredCoinDetails: any[] = []; // Array to store the filtered coin details

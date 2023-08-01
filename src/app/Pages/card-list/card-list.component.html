@@ -18,12 +18,24 @@
       </mat-form-field>
       <button mat-flat-button class="ml-10" color="warn">View Track List</button>
     </div>
+    
+    <div *ngIf="viewTrackList==false">
       <div *ngFor="let coin of filteredCoinDetails">
         <app-crypto-card
           [coin]="coin"
           (dataEvent)="handleDataFromChild($event)"
         ></app-crypto-card>
       </div>
+    </div>
+
+    <div *ngIf="viewTrackList==true">
+      <div *ngFor="let coin of filteredCoinDetails">
+        <app-crypto-card
+          [coin]="coin"
+          (dataEvent)="handleDataFromChild($event)"
+        ></app-crypto-card>
+      </div>
+    </div>
     </div>
     <div>
       <div class="fixed">
