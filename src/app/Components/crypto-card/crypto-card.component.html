@@ -1,0 +1,23 @@
+<div (click)="moveToCoinData(coin.id)" class="rounded-md border-2 mt-3 p-8 cursor-pointer w-full">
+  <div class="flex items-center justify-between">
+
+    <div class="flex ">
+      <div class="flex flex-col justify-center items-center mr-20">
+        <p class="text-4xl mb-6">{{coin.market_cap_rank}}</p>
+        <p class="text-sm text-gray-500">Market Cap Rank</p>
+        </div>
+  <img [src]="coin.image" class="w-20 h-20 mr-20"/>
+  <div>
+  <p class="text-xl font-semibold">{{coin.name}}</p>
+  <p class="text-md text-gray-500">{{coin.symbol}}</p>
+  <p class="text-xl mt-2"> ${{coin.current_price}}</p>
+</div>
+</div>
+
+<!-- percentage drop or increase -->
+<p *ngIf="coin.price_change_percentage_24h>0" class="text-green-500">{{coin.price_change_percentage_24h}} %</p>
+<p *ngIf="coin.price_change_percentage_24h<0" class="text-red-500">{{coin.price_change_percentage_24h}} %</p>
+
+</div>
+
+</div>

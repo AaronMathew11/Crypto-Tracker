@@ -1,0 +1,56 @@
+<div class="bg-red-500">
+  <p class="ml-20 py-20 text-3xl text-white font-semibold">
+    Check out The current status of Coins in the market !
+  </p>
+</div>
+<div>
+  <div class="flex mx-20">
+    <div class="w-[70%]">
+      <div *ngFor="let coin of coinDetails">
+        <app-crypto-card
+          [coin]="coin"
+          (dataEvent)="handleDataFromChild($event)"
+        ></app-crypto-card>
+      </div>
+    </div>
+    <div>
+      <div class="fixed">
+        <div class="bg-white border border-gray-300 ml-10 -mt-10 p-20 rounded-xl">
+          <p class="font-bold text-4xl mb-10">{{ selectedCoin.name }}</p>
+          <div class="flex">
+            <p class="mb-4 font-semibold">Total Supply :</p>
+            <p class="ml-8">{{ selectedCoin.total_supply }}</p>
+          </div>
+          <div class="flex">
+            <p class="mb-4 font-semibold">Max Supply :</p>
+            <p class="ml-8">{{ selectedCoin.max_supply }}</p>
+          </div>
+
+          <div class="flex">
+            <p class="mb-4 font-semibold">Circulating Supply :</p>
+            <p class="ml-8">{{ selectedCoin.circulating_supply }}</p>
+          </div>
+
+          <div class="flex">
+            <p class="mb-4 font-semibold">Max value in the last 24 hours :</p>
+            <p class="ml-8">{{ selectedCoin.high_24h }}</p>
+          </div>
+
+          <div class="flex">
+            <p class="mb-4 font-semibold">Min value in the last 24 hours :</p>
+            <p class="ml-8">{{ selectedCoin.low_24h }}</p>
+          </div>
+
+          <button
+            class="mt-5"
+            mat-stroked-button
+            color="primary"
+            (click)="openAnalytics(selectedCoin.id)"
+          >
+            View Analytics
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="px-20">
+ <p class="text-4xl font-semibold mb-8 mt-10">{{coinId}}</p>
+
+ <mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Wanna know more about {{coinDetails.name}} ?
+      </mat-panel-title>
+      <mat-panel-description>
+        Click me to know more
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p class="leading-8" [innerHTML]="coinDetails.description.en"></p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="flex flex-row ">
+  <div class="border border-gray-400 p-10 mt-20 rounded-md w-[40%]">
+ <div class="flex mt-10">
+  <p class="mb-4 font-medium">Total Supply :</p>
+  <p class="ml-5">{{ coinDetails.market_data.total_supply }}</p>
+</div>
+<div class="flex">
+  <p class="mb-4 font-medium">Max Supply :</p>
+  <p class="ml-5">{{ coinDetails.market_data.max_supply }}</p>
+</div>
+
+<div class="flex">
+  <p class="mb-4 font-medium">Circulating Supply :</p>
+  <p class="ml-5">{{ coinDetails.market_data.circulating_supply }}</p>
+</div>
+
+<div class="flex">
+  <p class="mb-4 font-medium">Max value in the last 24 hours :</p>
+  <p class="ml-5">{{ coinDetails.market_data.high_24h.usd }}</p>
+</div>
+
+<div class="flex">
+  <p class="mb-4 font-medium">Min value in the last 24 hours :</p>
+  <p class="ml-5">{{ coinDetails.market_data.low_24h.usd }}</p>
+</div>
+</div>
+
+
+<div class="chart-container w-[90%] h-[100%] mx-20 mt-20">
+  <canvas  id="MyChart" >{{ chart }}</canvas>
+</div>
+</div>
+
+<button mat-stroked-button class="mt-20" (click)="openTrack()">Add to Track List</button>
+</div>
