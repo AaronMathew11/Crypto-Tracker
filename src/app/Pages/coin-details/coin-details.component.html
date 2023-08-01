@@ -1,6 +1,9 @@
 <div class="px-20">
- <p class="text-4xl font-semibold mb-8 mt-10">{{coinId}}</p>
-
+  <div class="flex flex-row items-center mt-10 mb-5">
+  <img [src]="coinDetails.image.large" class="w-10 h-10 mr-4"/>
+ <p class="text-4xl font-semibold   ">{{coinId}}</p>
+</div>
+<p class="text-4xl font-bold mb-10 text-gray-600 ">${{coinDetails.market_data.current_price.usd}}</p>
  <mat-accordion>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
@@ -17,19 +20,25 @@
 
 <div class="flex flex-row ">
   <div class="border border-gray-400 p-10 mt-20 rounded-md w-[40%]">
- <div class="flex mt-10">
-  <p class="mb-4 font-medium">Total Supply :</p>
-  <p class="ml-5">{{ coinDetails.market_data.total_supply }}</p>
-</div>
-<div class="flex">
-  <p class="mb-4 font-medium">Max Supply :</p>
-  <p class="ml-5">{{ coinDetails.market_data.max_supply }}</p>
-</div>
 
-<div class="flex">
-  <p class="mb-4 font-medium">Circulating Supply :</p>
-  <p class="ml-5">{{ coinDetails.market_data.circulating_supply }}</p>
-</div>
+    <div *ngIf="coinDetails.market_data.ath_change_percentage.usd<0" class="flex">
+      <p class="mb-4 font-medium">ATH Change % :</p>
+      <p  class="ml-5 text-red-600">{{ coinDetails.market_data.ath_change_percentage.usd }} %</p>
+    </div>
+    <div *ngIf="coinDetails.market_data.ath_change_percentage.usd>0" class="flex">
+      <p class="mb-4 font-medium">ATH Change % :</p>
+      <p  class="ml-5 text-green-600">{{ coinDetails.market_data.ath_change_percentage.usd }} %</p>
+    </div>
+
+    <div *ngIf="coinDetails.market_data.atl_change_percentage.usd<0" class="flex">
+      <p class="mb-4 font-medium">ATL Change % :</p>
+      <p class="ml-5 text-red-600">{{ coinDetails.market_data.atl_change_percentage.usd }} %</p>
+    </div>
+
+    <div *ngIf="coinDetails.market_data.atl_change_percentage.usd>0" class="flex">
+      <p class="mb-4 font-medium">ATL Change % :</p>
+      <p class="ml-5 text-green-600">{{ coinDetails.market_data.atl_change_percentage.usd }} %</p>
+    </div>
 
 <div class="flex">
   <p class="mb-4 font-medium">Max value in the last 24 hours :</p>
@@ -40,13 +49,67 @@
   <p class="mb-4 font-medium">Min value in the last 24 hours :</p>
   <p class="ml-5">{{ coinDetails.market_data.low_24h.usd }}</p>
 </div>
+
+<div class="flex">
+  <p class="mb-4 font-medium">Market Cap :</p>
+  <p class="ml-8">{{ coinDetails.market_data.market_cap.usd }}</p>
+</div>
+
+<div class="flex mt-10">
+  <p class="mb-4 font-medium">Total Supply :</p>
+  <p class="ml-5">{{ coinDetails.market_data.total_supply }}</p>
+</div>
+<div class="flex">
+  <p class="mb-4 font-medium">Total Volume :</p>
+  <p class="ml-5">{{ coinDetails.market_data.total_volume.usd }}</p>
+</div>
+
+<div class="flex">
+  <p class="mb-4 font-medium">Circulating Supply :</p>
+  <p class="ml-5">{{ coinDetails.market_data.circulating_supply }}</p>
+</div>
+<button mat-stroked-button class="mt-16" (click)="openTrack()">Add to Track List</button>
+
 </div>
 
 
 <div class="chart-container w-[90%] h-[100%] mx-20 mt-20">
+ <div class="flex flex-row justify-between">
+  <mat-chip-listbox aria-label="Fish selection">
+    <mat-chip-option selected>Today</mat-chip-option>
+    <mat-chip-option color="accent">This Week</mat-chip-option>
+    <mat-chip-option color ="warn">This Month</mat-chip-option>
+  </mat-chip-listbox>
+  <div>
+    <mat-form-field
+      appearance="outline"
+      class="mr-10 bg-white rounded-md ml-10"
+      (click)="$event.stopPropagation()"
+      disableRipple
+    >
+      <mat-label>Select a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          [(ngModel)]="startDate"
+          matStartDate
+          placeholder="Start date"
+        />
+        <input
+          [(ngModel)]="endDate"
+          matEndDate
+          placeholder="End date"
+          (ngModelChange)="applyDateFilter()"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+    </mat-form-field>
+  </div></div>
   <canvas  id="MyChart" >{{ chart }}</canvas>
 </div>
 </div>
 
-<button mat-stroked-button class="mt-20" (click)="openTrack()">Add to Track List</button>
 </div>

@@ -4,9 +4,21 @@
   </p>
 </div>
 <div>
+
   <div class="flex mx-20">
-    <div class="w-[70%]">
-      <div *ngFor="let coin of coinDetails">
+    <div class="w-[70%] justify-center">
+      <div class="flex flex-row items-center justify-center -mt-4">
+      <mat-form-field appearance="outline" class=" bg-white rounded-md w-[70%]">
+        <input
+          matInput
+          (input)="applyFilter($event)"
+          placeholder="Search for a Coin"
+        />
+        <mat-icon matSuffix style="color: gray">search</mat-icon>
+      </mat-form-field>
+      <button mat-flat-button class="ml-10" color="warn">View Track List</button>
+    </div>
+      <div *ngFor="let coin of filteredCoinDetails">
         <app-crypto-card
           [coin]="coin"
           (dataEvent)="handleDataFromChild($event)"
@@ -18,29 +30,32 @@
         <div class="bg-white border border-gray-300 ml-10 -mt-10 p-20 rounded-xl">
           <p class="font-bold text-4xl mb-10">{{ selectedCoin.name }}</p>
           <div class="flex">
-            <p class="mb-4 font-semibold">Total Supply :</p>
-            <p class="ml-8">{{ selectedCoin.total_supply }}</p>
+            <p class="mb-4 font-medium">Market Cap :</p>
+            <p class="ml-8">{{ selectedCoin.market_cap }}</p>
           </div>
+
+
           <div class="flex">
-            <p class="mb-4 font-semibold">Max Supply :</p>
-            <p class="ml-8">{{ selectedCoin.max_supply }}</p>
+            <p class="mb-4 font-medium">Total Supply :</p>
+            <p class="ml-8">{{ selectedCoin.total_supply }}</p>
           </div>
 
           <div class="flex">
-            <p class="mb-4 font-semibold">Circulating Supply :</p>
+            <p class="mb-4 font-medium">Circulating Supply :</p>
             <p class="ml-8">{{ selectedCoin.circulating_supply }}</p>
           </div>
 
           <div class="flex">
-            <p class="mb-4 font-semibold">Max value in the last 24 hours :</p>
+            <p class="mb-4 font-medium">Max value in the last 24 hours :</p>
             <p class="ml-8">{{ selectedCoin.high_24h }}</p>
           </div>
 
           <div class="flex">
-            <p class="mb-4 font-semibold">Min value in the last 24 hours :</p>
+            <p class="mb-4 font-medium">Min value in the last 24 hours :</p>
             <p class="ml-8">{{ selectedCoin.low_24h }}</p>
           </div>
 
+          <div class="flex flex-row">
           <button
             class="mt-5"
             mat-stroked-button
@@ -49,6 +64,16 @@
           >
             View Analytics
           </button>
+
+          <button
+          class="mt-5 ml-4"
+          mat-stroked-button
+          color="primary"
+          (click)="openAnalytics(selectedCoin.id)"
+        >
+          Add to Track List
+        </button>
+      </div>
         </div>
       </div>
     </div>

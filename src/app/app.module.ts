@@ -15,7 +15,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrackDialogComponent } from './Components/track-dialog/track-dialog.component';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,12 @@ import { TrackDialogComponent } from './Components/track-dialog/track-dialog.com
   ],
   imports: [
     BrowserModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatChipsModule,
+    MatDatepickerModule, MatNativeDateModule,
+    FormsModule,
+    MatFormFieldModule,
     HttpClientModule,
     AppRoutingModule,MatDialogModule,
     MatButtonModule, MatDividerModule, MatIconModule, BrowserAnimationsModule,MatExpansionModule

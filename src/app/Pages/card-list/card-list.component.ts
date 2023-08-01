@@ -18,6 +18,9 @@ export class CardListComponent {
 
   coinDetails! : Coin[] ;
   selectedCoin!:Coin;
+  filteredCoinDetails: any[] = []; // Array to store the filtered coin details
+  filter:string="";
+
 
 
   ngOnInit(){
@@ -25,11 +28,16 @@ export class CardListComponent {
     this.apicall.GetCardData().subscribe(
       result=>{
         this.coinDetails=result;
+        this.filteredCoinDetails=result;
         console.log(result);
         this.selectedCoin=result[0];
       }
     )
 
+
+  }
+
+  applyDateFilter(){
 
   }
 
@@ -42,6 +50,18 @@ export class CardListComponent {
   openAnalytics(id: string)
   {
     this.router.navigate([`/details/${id}`]);
+  }
+
+  applyFilter(e: any) {
+    console.log(e.target.value);
+    this.filter = (e.target as HTMLInputElement).value.trim().toLowerCase();
+    this.filteredCoinDetails = this.filter
+      ? this.coinDetails.filter(coin => coin.name.includes(this.filter))
+      : this.coinDetails;
+  }
+
+  matchesFilter(coin: any): boolean {
+    return coin.name.toLowerCase().includes(this.filter);
   }
 
 }

@@ -21,6 +21,8 @@ export class CoinDetailsComponent {
   public chart: any;
   prices:number[]=[];
   time:string[]=[];
+  endDate!:Date;
+  startDate!:Date;
 
   constructor(private router: ActivatedRoute, private apicall :ApiCallsService,private matDialog: MatDialog){
     this.coinId = this.router.snapshot.paramMap.get('id')||"";
@@ -93,8 +95,7 @@ export class CoinDetailsComponent {
   openTrack()
   {
     var dialogref = this.matDialog.open(TrackDialogComponent, {
-      width: '350px',
-      height: '150px',
+      width: '750px',
       data: this.coinDetails
     })
     // dialogref.afterClosed().subscribe(
@@ -102,6 +103,11 @@ export class CoinDetailsComponent {
 
     //   }
     // )
+  }
+
+  applyDateFilter()
+  {
+
   }
 
 
