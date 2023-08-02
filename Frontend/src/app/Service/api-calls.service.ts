@@ -45,4 +45,19 @@ export class ApiCallsService {
     return this.http.get<any>(this.apiBaseUrl+'/getTrackingList');
   }
 
+  public UserExists(id: string): Observable<any>
+  {
+    return this.http.get<any>(this.apiBaseUrl+'/checkUserExists'+`/${id}`);
+  }
+
+  public AddUser(data:any) :Observable<any>
+  {
+    let headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "*"
+    })
+    return this.http.post(this.apiBaseUrl+'/addUser',data,{
+      headers
+    });
+  }
+
 }

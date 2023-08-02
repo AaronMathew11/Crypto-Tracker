@@ -1,4 +1,4 @@
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { UserService } from './Service/user.service';
 
@@ -9,10 +9,10 @@ import { UserService } from './Service/user.service';
 })
 export class AppComponent {
   title = 'Crypto-Tracker';
-  user:any;
-  loggedIn:any;
-  constructor(private authService: SocialAuthService,
-    private userService: UserService) { }
+  user: SocialUser | null | undefined;
+  loggedIn: any;
+
+  constructor(private authService: SocialAuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
@@ -20,20 +20,8 @@ export class AppComponent {
       this.loggedIn = (user != null);
       console.log(this.user);
 
-
-      try{
-      this.authService.authState.subscribe((user) => {
-        this.user = user;
-        this.loggedIn = (user != null);
-        console.log(this.user);
-
-        // Set the user data in the UserService.
-        this.userService.setUser(user);
-      });}
-      catch(e){
-        console.log(e);
-      }
+      // Set the user data in the UserService.
+      this.userService.setUser(user);
     });
-
   }
 }

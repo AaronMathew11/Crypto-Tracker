@@ -7,7 +7,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 export class UserService {
   private user: SocialUser | null = null;
 
-  setUser(user: SocialUser) {
+  setUser(user: SocialUser | null) {
     this.user = user;
   }
 
