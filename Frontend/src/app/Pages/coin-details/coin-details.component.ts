@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Coin } from 'src/app/Models/Crypto';
 import { ApiCallsService } from 'src/app/Service/api-calls.service';
@@ -15,7 +15,7 @@ import { TrackDialogComponent } from 'src/app/Components/track-dialog/track-dial
 export class CoinDetailsComponent {
 
   panelOpenState = false;
-
+  screenWidth: number;
   coinId : string;
   coinDetails : any ={};
   public chart: any;
@@ -26,6 +26,13 @@ export class CoinDetailsComponent {
 
   constructor(private router: ActivatedRoute, private apicall :ApiCallsService,private matDialog: MatDialog,private router2 : Router){
     this.coinId = this.router.snapshot.paramMap.get('id')||"";
+    this.screenWidth = window.innerWidth;
+
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.screenWidth = event.target.innerWidth;
   }
 
 
@@ -201,7 +208,13 @@ export class CoinDetailsComponent {
     )
   }
 
-
+  getFlexClasses() {
+    if (this.screenWidth >= 1268) {
+      return 'flex flex-row';
+    } else {
+      return 'flex flex-col';
+    }
+  }
 
 
 }

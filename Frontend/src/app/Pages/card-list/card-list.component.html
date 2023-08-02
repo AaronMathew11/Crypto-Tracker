@@ -1,13 +1,13 @@
 <div class="bg-red-500">
-  <p class="ml-20 py-20 text-3xl text-white font-semibold">
+  <p class="mx-20 py-20 text-3xl text-white font-semibold">
     Check out The current status of Coins in the market !
   </p>
 </div>
 
-<div>
+<div >
 
-  <div class="flex mx-20">
-    <div class="w-[70%] justify-center">
+  <div class="flex px-16 ">
+    <div  [ngStyle]="getDivStyle()">
       <div class="flex flex-row items-center justify-center -mt-4">
       <mat-form-field appearance="outline" class=" bg-white rounded-md w-[70%]">
         <input
@@ -17,7 +17,7 @@
         />
         <mat-icon matSuffix style="color: gray">search</mat-icon>
       </mat-form-field>
-      <button *ngIf="viewTrackList==false" mat-flat-button class="ml-10" color="warn" (click)="toggleTrackList()">View Track List</button>
+      <button *ngIf="viewTrackList==false" mat-flat-button class="ml-10" color="warn" (click)="toggleTrackList()">Track List</button>
 
       <button *ngIf="viewTrackList==true" mat-flat-button class="ml-10" color="warn" (click)="toggleTrackList()">Back</button>
     </div>
@@ -26,6 +26,7 @@
       <div *ngFor="let coin of filteredCoinDetails">
         <app-crypto-card
           [coin]="coin"
+          (dblclick)="onDblClick(coin.id)"
           (dataEvent)="handleDataFromChild($event)"
         ></app-crypto-card>
       </div>
@@ -34,7 +35,7 @@
 
     </div>
 
-    <div>
+    <div class="flex-1 " *ngIf="viewTrackList == false && screenWidth >= 1268">
       <div class="fixed" *ngIf="viewTrackList==false">
         <div class="bg-white border border-gray-300 ml-10 -mt-10 p-20 rounded-xl">
           <p class="font-bold text-4xl mb-10">{{ selectedCoin.name }}</p>
