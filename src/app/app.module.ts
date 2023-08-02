@@ -22,6 +22,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatChipsModule} from '@angular/material/chips';
+import { MatTableModule } from '@angular/material/table';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+  GoogleLoginProvider,
+  GoogleSigninButtonDirective,
+  GoogleSigninButtonModule,
+} from '@abacritt/angularx-social-login';
+
 
 @NgModule({
   declarations: [
@@ -33,9 +42,12 @@ import {MatChipsModule} from '@angular/material/chips';
   ],
   imports: [
     BrowserModule,
+    GoogleSigninButtonModule,
+    SocialLoginModule,
     MatSlideToggleModule,
     MatInputModule,
     MatChipsModule,
+    MatTableModule,
     MatDatepickerModule, MatNativeDateModule,
     FormsModule,
     MatFormFieldModule,
@@ -43,7 +55,27 @@ import {MatChipsModule} from '@angular/material/chips';
     AppRoutingModule,MatDialogModule,
     MatButtonModule, MatDividerModule, MatIconModule, BrowserAnimationsModule,MatExpansionModule
   ],
-  providers: [ApiCallsService],
+
+  providers: [ApiCallsService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '11691811536-ic9tsv3iaff2v2u68fta5cpouff22o5n.apps.googleusercontent.com'
+            )
+          },
+
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

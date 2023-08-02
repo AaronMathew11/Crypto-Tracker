@@ -14,8 +14,16 @@ var trackListSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
+  currentPrice: {
+    type: String,
+    default: 0,
+  },
   updateEmail: {
     type: Boolean,
+    required: true,
+  },
+  userEmail: {
+    type: String,
     required: true,
   },
 });

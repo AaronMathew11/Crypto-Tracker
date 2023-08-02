@@ -6,12 +6,16 @@ const addCoin = async (req, res) => {
       id: req.body.id,
       upperLimit: req.body.upperLimit,
       lowerLimit: req.body.lowerLimit,
-      updateEmail : req.body.updateEmail,
+      updateEmail: req.body.updateEmail,
+      currentPrice: req.body.currentPrice,
+      userEmail: req.body.email,
     };
 
+    console.log("coin before adding : ", coin);
     await trackList.create(coin);
     res.send({ status: 200, success: true, msg: coin });
   } catch (e) {
+    console.log(e);
     res.send({ status: 400, success: false, msg: "could not Add coin" });
   }
 };

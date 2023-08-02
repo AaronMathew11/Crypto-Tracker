@@ -28,6 +28,7 @@ export class CoinDetailsComponent {
     this.coinId = this.router.snapshot.paramMap.get('id')||"";
   }
 
+
   ngOnInit(){
 
     this.apicall.GetCoinData(this.coinId).subscribe(
@@ -50,8 +51,11 @@ export class CoinDetailsComponent {
         // }
         result.prices.forEach((element:any) => {
           this.prices.push(element[1]);
-          this.time.push(new Date(element[0]).toLocaleDateString('en-US'));
-        });
+          const timeString = new Date(element[0]).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          this.time.push(timeString);        });
 
         console.log("prices : ",this.prices);
         console.log("time : ",this.time);
@@ -64,6 +68,10 @@ export class CoinDetailsComponent {
 
   }
   createChart(){
+    if (this.chart) {
+      // Destroy the existing chart instance if it exists
+      this.chart.destroy();
+    }
 
     console.log("prices in chart : ",this.prices)
     this.chart = new Chart("MyChart", {
@@ -75,21 +83,103 @@ export class CoinDetailsComponent {
           {
             label: "Price",
             data: this.prices,
-            backgroundColor: 'green'
+            backgroundColor: 'green',
+            pointRadius: 1,
           }
-          // {
-          //   label: "Profit",
-          //   data: ['542', '542', '536', '327', '17',
-					// 				 '0.00', '538', '541'],
-          //   backgroundColor: 'limegreen'
-          // }
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio:2.5,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Time',
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Price',
+            },
+          },
+        }
       }
 
     });
+  }
+
+  toggleToday=false;
+  filterTodays(){
+    this.toggleToday=!this.toggleToday;
+    this.toggleMonth=false;
+    this.toggleWeek=false;
+
+    if(this.toggleToday==true)
+    {
+      this.prices=[];
+      this.time=[];
+      this.apicall.GetPriceRange(this.coinId, Math.floor((Date.now()- 0.1*24*60*60*1000)/1000),Math.floor(Date.now()/1000)).subscribe(result=>{
+        result.prices.forEach((element:any) => {
+          this.prices.push(element[1]);
+          const timeString = new Date(element[0]).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          this.time.push(timeString);        });
+
+        console.log("prices : ",this.prices);
+        console.log("time : ",this.time);
+        this.createChart();
+      });
+    }
+  }
+
+  toggleWeek=false;
+    filterWeek(){
+      this.toggleWeek=!this.toggleWeek;
+      this.toggleMonth=false;
+      this.toggleToday=false;
+      if(this.toggleWeek==true)
+      {
+        this.prices=[];
+        this.time=[];
+        this.apicall.GetPriceRange(this.coinId, Math.floor((Date.now()- 7*24*60*60*1000)/1000),Math.floor(Date.now()/1000)).subscribe(result=>{
+          result.prices.forEach((element:any) => {
+            this.prices.push(element[1]);
+            this.time.push(new Date(element[0]).toLocaleDateString('en-US'));
+          });
+
+          console.log("prices : ",this.prices);
+          console.log("time : ",this.time);
+          this.createChart();
+        });
+      }
+  }
+
+
+  toggleMonth=false;
+    filterMonth(){
+      this.toggleMonth=!this.toggleMonth;
+      this.toggleToday=false;
+      this.toggleWeek=false;
+      if(this.toggleMonth==true)
+      {
+        this.prices=[];
+        this.time=[];
+        this.apicall.GetPriceRange(this.coinId, Math.floor((Date.now()- 30*24*60*60*1000)/1000),Math.floor(Date.now()/1000)).subscribe(result=>{
+          result.prices.forEach((element:any) => {
+            this.prices.push(element[1]);
+            this.time.push(new Date(element[0]).toLocaleDateString('en-US'));
+          });
+
+          console.log("prices : ",this.prices);
+          console.log("time : ",this.time);
+          this.createChart();
+        });
+      }
   }
 
   openTrack()
@@ -105,10 +195,6 @@ export class CoinDetailsComponent {
     // )
   }
 
-  applyDateFilter()
-  {
-
-  }
 
 
 

@@ -42,7 +42,7 @@ export class ApiCallsService {
 
   public GetTaskList() : Observable<any>
   {
-    return this.http.get<any>(this.baseUrl+'/getTrackingList');
+    return this.http.get<any>(this.apiBaseUrl+'/getTrackingList');
   }
 
 }

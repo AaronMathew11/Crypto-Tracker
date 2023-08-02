@@ -1,36 +1,36 @@
-<div class="flex items-center justify-between shadow-md" >
+<div class="flex items-center justify-between shadow-md">
   <img
     class="m-5"
     width="150"
     alt="Angular Logo"
     src="https://www.luganodes.com/static/bb96106f6500547f02d758f98fa67a30/e22d8/lgnsBlack.webp"
   />
-<div class="flex gap-5 mr-10">
+  <div class="flex gap-5 mr-10">
+    <a
+      aria-label="Linkedin"
+      target="_blank"
+      rel="noopener"
+      href="https://www.linkedin.com/in/aaron-mathew-8a66761b4/"
+      title="Twitter"
+    >
+      About
+    </a>
 
-
-  <a
-    aria-label="About"
-    target="_blank"
-    rel="noopener"
-    href="https://twitter.com/angular"
-    title="Twitter"
-  >
-About
-  </a>
-
-
-  <a
-    aria-label="Angular on YouTube"
-    target="_blank"
-    rel="noopener"
-    href="https://youtube.com/angular"
-    title="YouTube"
-  >
-Profile
-  </a>
-
-
+    <a
+      aria-label="My Resume"
+      target="_blank"
+      rel="noopener"
+      href="https://drive.google.com/file/d/1jFeZcQfTvIOgXmxO2FARMuti5jV2ah_n/view?usp=sharing"
+      title="Resume"
+    >
+      Profile
+    </a>
   </div>
 </div>
-
-<router-outlet></router-outlet>
+<div *ngIf="!user" class="flex flex-row justify-center items-center h-full -mt-20">
+<asl-google-signin-button icon="large" ></asl-google-signin-button>
+<p class="ml-5">Sign in to Continue</p>
+</div>
+<div *ngIf="user">
+  <router-outlet></router-outlet>
+</div>

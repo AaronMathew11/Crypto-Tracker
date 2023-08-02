@@ -1,19 +1,20 @@
 <div class="p-20">
-  <p>Just a few more steps before we add {{message.name}} to your trackList...</p>
-  <form class="example-form">
-  <p>Fill in the Upper alert limit</p>
+  <p class="text-xl font-bold">Just a few more steps before we add {{message.name}} to your trackList...</p>
+  <p class="mt-10 text-gray-500">Fill in the Upper alert limit</p>
     <mat-form-field class="example-full-width">
       <mat-label>Upper Limit</mat-label>
-      <input  [(ngModel)]="upperLimit" matInput placeholder="Enter the upper alert limit" value="">
+      <input   [(ngModel)]="upperLimit" matInput placeholder="Enter the upper alert limit" value="">
     </mat-form-field>
 
-  <p>Fill in the lower alert limit</p>
+  <p class=" text-gray-500 mt-3">Fill in the lower alert limit</p>
   <mat-form-field class="example-full-width">
     <mat-label>Lower Limit</mat-label>
     <input [(ngModel)]="lowerLimit" matInput placeholder="Enter the lower alert limit" value="">
   </mat-form-field>
+  <div class="flex flex-row mt-10">
  <p>would you like to recieve daily update emails for this currency ?</p>
-  <mat-slide-toggle (click)="toggleSubscription()">Slide me!</mat-slide-toggle>
-  <button mat-button (click)="submit()">submit</button>
-</form>
+  <mat-slide-toggle class="ml-6" (click)="toggleSubscription()">Slide me!</mat-slide-toggle>
+</div><br>
+  <button class="mt-10" mat-flat-button (click)="submit()">submit</button>
+
 </div>
