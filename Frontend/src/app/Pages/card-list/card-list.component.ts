@@ -22,7 +22,7 @@ export class CardListComponent {
 
   viewTrackList:boolean=false;
   coinDetails! : Coin[] ;
-  selectedCoin!:Coin;
+  selectedCoin:any={};
   trackList:any[]=[];
   filteredCoinDetails: any[] = []; // Array to store the filtered coin details
   filter:string="";

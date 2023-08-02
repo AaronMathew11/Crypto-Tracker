@@ -7,15 +7,15 @@ var trackListSchema = mongoose.Schema({
     trim: true,
   },
   upperLimit: {
-    type: String,
+    type: Number,
     trim: true,
   },
   lowerLimit: {
-    type: String,
+    type: Number,
     trim: true,
   },
   currentPrice: {
-    type: String,
+    type: Number,
     default: 0,
   },
   updateEmail: {

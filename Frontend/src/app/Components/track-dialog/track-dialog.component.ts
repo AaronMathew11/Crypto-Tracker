@@ -18,6 +18,7 @@ export class TrackDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<TrackDialogComponent>, @Inject(MAT_DIALOG_DATA) public message:any, private apiCall : ApiCallsService,private userService: UserService){
     this.user = this.userService.getUser();
+    console.log(this.user.email);
   }
 
   ngOnInit(){
@@ -38,6 +39,8 @@ export class TrackDialogComponent {
       currentPrice : this.message.market_data.current_price.usd,
       email : this.user.email
     }
+
+    console.log("submit this : ",coin);
 
     this.apiCall.AddToTaskList(coin).subscribe(
       result=>{

@@ -1,6 +1,6 @@
 <div class="px-20">
   <div class="flex flex-row items-center mt-10 mb-5">
-  <img [src]="coinDetails.image.large" class="w-10 h-10 mr-4"/>
+  <img [src]="coinDetails?.image.large" class="w-10 h-10 mr-4"/>
  <p class="text-4xl font-semibold   ">{{coinId}}</p>
 </div>
 <p class="text-4xl font-bold mb-10 text-gray-600 ">${{coinDetails.market_data.current_price.usd}}</p>

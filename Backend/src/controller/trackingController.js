@@ -2,6 +2,7 @@ var trackList = require("../models/TrackList");
 
 const addCoin = async (req, res) => {
   try {
+    console.log(req.body);
     coin = {
       id: req.body.id,
       upperLimit: req.body.upperLimit,

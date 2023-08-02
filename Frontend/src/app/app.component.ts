@@ -21,7 +21,7 @@ export class AppComponent {
       console.log(this.user);
 
 
-
+      try{
       this.authService.authState.subscribe((user) => {
         this.user = user;
         this.loggedIn = (user != null);
@@ -29,7 +29,11 @@ export class AppComponent {
 
         // Set the user data in the UserService.
         this.userService.setUser(user);
-      });
+      });}
+      catch(e){
+        console.log(e);
+      }
     });
+
   }
 }
