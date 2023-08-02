@@ -43,6 +43,8 @@ export class CardListComponent {
     )
     this.apicall.GetTaskList().subscribe(
      async result=>{
+      this.trackList=[];
+
         console.log("tasklist is :",result.data);
 
         for(let i=0;i<result.data.length;i++)
@@ -100,11 +102,28 @@ export class CardListComponent {
       width: '750px',
       data: coin
     })
-    // dialogref.afterClosed().subscribe(
-    //   (result) => {
+    dialogref.afterClosed().subscribe(
+      (result) => {
+        this.apicall.GetTaskList().subscribe(
+          async result=>{
+            this.trackList=[];
+             console.log("tasklist is :",result.data);
 
-    //   }
-    // )
+             for(let i=0;i<result.data.length;i++)
+             {
+               this.apicall.GetCoinData(result.data[i].id).subscribe(
+                 result=>{
+                   this.trackList.push(result);
+                 }
+               )
+             }
+             this.dataSource= new MatTableDataSource<any>(this.trackList);
+             console.log("my datasource : ",this.dataSource.data);
+
+           }
+         )
+      }
+    )
   }
 
   Analytics(id:string)

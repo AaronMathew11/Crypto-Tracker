@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Coin } from 'src/app/Models/Crypto';
 import { ApiCallsService } from 'src/app/Service/api-calls.service';
 import Chart from 'chart.js/auto';
@@ -24,7 +24,7 @@ export class CoinDetailsComponent {
   endDate!:Date;
   startDate!:Date;
 
-  constructor(private router: ActivatedRoute, private apicall :ApiCallsService,private matDialog: MatDialog){
+  constructor(private router: ActivatedRoute, private apicall :ApiCallsService,private matDialog: MatDialog,private router2 : Router){
     this.coinId = this.router.snapshot.paramMap.get('id')||"";
   }
 
@@ -182,17 +182,23 @@ export class CoinDetailsComponent {
       }
   }
 
+  back()
+  {
+    this.router2.navigate(['/']);
+
+  }
+
   openTrack()
   {
     var dialogref = this.matDialog.open(TrackDialogComponent, {
       width: '750px',
       data: this.coinDetails
     })
-    // dialogref.afterClosed().subscribe(
-    //   (result) => {
+    dialogref.afterClosed().subscribe(
+      (result) => {
 
-    //   }
-    // )
+      }
+    )
   }
 
 

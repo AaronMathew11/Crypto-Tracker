@@ -5,8 +5,8 @@ const addCoin = async (req, res) => {
     console.log(req.body);
     coin = {
       id: req.body.id,
-      upperLimit: req.body.upperLimit,
-      lowerLimit: req.body.lowerLimit,
+      upperLimit: Number(req.body.upperLimit),
+      lowerLimit: Number(req.body.lowerLimit),
       updateEmail: req.body.updateEmail,
       currentPrice: req.body.currentPrice,
       userEmail: req.body.email,
