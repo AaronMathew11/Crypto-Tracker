@@ -1,5 +1,6 @@
 # Crypto-Tracker
 
+A crypto tracker, also known as a cryptocurrency tracker, is a tool or application used to monitor and track the performance of various cryptocurrencies in real-time or over specific time periods. It provides users with valuable information about the prices, market capitalization, trading volumes, historical data, and other relevant metrics of cryptocurrencies.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.4.
 
